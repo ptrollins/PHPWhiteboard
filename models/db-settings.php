@@ -6,7 +6,7 @@ http://usercake.com
 
 //Database Information
 $db_host = "localhost"; //Host address (most likely localhost)
-$db_name = "ecommerce"; //Name of Database
+$db_name = "whiteboard"; //Name of Database
 $db_user = "root"; //Name of database user
 $db_pass = "root"; //Password for database user
 $db_table_prefix = "uc_";
@@ -27,11 +27,11 @@ if(mysqli_connect_errno()) {
 }
 
 //Direct to install directory, if it exists
-if(is_dir("install/"))
-{
-	header("Location: install/");
-	die();
-
-}
+//if(is_dir("install/"))
+//{
+//	header("Location: install/");
+//	die();
+//
+//}
 
 ?>

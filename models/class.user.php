@@ -113,6 +113,8 @@ class loggedInUser {
 	public function userLogOut()
 	{
 		destroySession("userCakeUser");
+		header("Location: index.php");
+		die();
 	}	
 }
 

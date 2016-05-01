@@ -132,7 +132,7 @@ class User
 					'".time()."',
 					'0',
 					?,
-					'New Member',
+					'Student',
 					'".time()."',
 					'0'
 					)");
