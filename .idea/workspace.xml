@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90dc0288-4ecf-44cd-91ae-1714e60a6185" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/left-nav.php" afterPath="$PROJECT_DIR$/left-nav.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/class.newuser.php" afterPath="$PROJECT_DIR$/models/class.newuser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/class.user.php" afterPath="$PROJECT_DIR$/models/class.user.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/db-settings.php" afterPath="$PROJECT_DIR$/models/db-settings.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/funcs.php" afterPath="$PROJECT_DIR$/models/funcs.php" />
     </list>
     <ignored path="PHPWhiteboard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,58 +55,116 @@
       <file leaf-file-name="funcs.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/funcs.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3450">
-              <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+            <state relative-caret-position="1564">
+              <caret line="1380" column="1" selection-start-line="1380" selection-start-column="1" selection-end-line="1380" selection-end-column="1" />
               <folding>
-                <marker date="1360603860000" expanded="true" signature="2800:2860" placeholder="..." />
-                <marker date="1360603860000" expanded="true" signature="3040:3102" placeholder="..." />
-                <marker date="1360603860000" expanded="true" signature="3592:3645" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="3677:3753" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="4094:4177" placeholder="SELECT activ... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="4521:4597" placeholder="SELECT activ... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="4973:5069" placeholder="SELECT activ... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="5419:5644" placeholder="SELECT id, u... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="6622:6879" placeholder="SELECT id, u... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="8005:8131" placeholder="SELECT id, p... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="10826:10899" placeholder="SELECT activ... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="11243:11323" placeholder="SELECT activ... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="11724:11833" placeholder="SELECT activ... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="11878:12024" placeholder="SELECT activ... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="12512:12587" placeholder="INSERT INTO ${$db_table_prefix}permissions... " />
-                <marker date="1360603860000" expanded="true" signature="12856:12915" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="12947:13029" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="13061:13143" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="13713:13772" placeholder="SELECT id, n... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="14094:14180" placeholder="SELECT id, n... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="14522:14597" placeholder="SELECT id FR... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="14961:15038" placeholder="SELECT id FR... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="15890:16002" placeholder="INSERT INTO ${$db_table_prefix}user_permission_matches... " />
-                <marker date="1360603860000" expanded="true" signature="16548:16639" placeholder="SELECT id, u... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="17008:17107" placeholder="SELECT id, p... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="17532:17627" placeholder="SELECT id, u... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="18033:18132" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="19238:19307" placeholder="INSERT INTO ${$db_table_prefix}pages... " />
-                <marker date="1360603860000" expanded="true" signature="19535:19588" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="19620:19696" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="19992:20056" placeholder="SELECT id, p... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="20420:20511" placeholder="SELECT id, p... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="20858:20932" placeholder="SELECT priva... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="21767:21879" placeholder="INSERT INTO ${$db_table_prefix}permission_page_matches... " />
-                <marker date="1360603860000" expanded="true" signature="22437:22536" placeholder="SELECT id, p... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="22968:23067" placeholder="SELECT id, p... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="23462:23561" placeholder="DELETE FROM " />
-                <marker date="1360603860000" expanded="true" signature="24226:24319" placeholder="SELECT id, p... ${$db_table_prefix}" />
-                <marker date="1360603860000" expanded="true" signature="24944:25040" placeholder="SELECT permi... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="2800:2860" placeholder="..." />
+                <marker date="1462119878000" expanded="true" signature="3040:3102" placeholder="..." />
+                <marker date="1462119878000" expanded="true" signature="3592:3645" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="3677:3753" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="4094:4177" placeholder="SELECT activ... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="4521:4597" placeholder="SELECT activ... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="4973:5069" placeholder="SELECT activ... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="5419:5644" placeholder="SELECT id, u... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="6622:6879" placeholder="SELECT id, u... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="8005:8131" placeholder="SELECT id, p... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="10826:10899" placeholder="SELECT activ... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="11243:11323" placeholder="SELECT activ... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="11724:11833" placeholder="SELECT activ... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="11878:12024" placeholder="SELECT activ... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="12512:12587" placeholder="INSERT INTO ${$db_table_prefix}permissions... " />
+                <marker date="1462119878000" expanded="true" signature="12856:12915" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="12947:13029" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="13061:13143" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="13713:13772" placeholder="SELECT id, n... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="14094:14180" placeholder="SELECT id, n... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="14522:14597" placeholder="SELECT id FR... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="14961:15038" placeholder="SELECT id FR... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="15890:16002" placeholder="INSERT INTO ${$db_table_prefix}user_permission_matches... " />
+                <marker date="1462119878000" expanded="true" signature="16548:16639" placeholder="SELECT id, u... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="17008:17107" placeholder="SELECT id, p... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="17532:17627" placeholder="SELECT id, u... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="18033:18132" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="19238:19307" placeholder="INSERT INTO ${$db_table_prefix}pages... " />
+                <marker date="1462119878000" expanded="true" signature="19535:19588" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="19620:19696" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="19992:20056" placeholder="SELECT id, p... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="20420:20511" placeholder="SELECT id, p... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="20858:20932" placeholder="SELECT priva... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="21767:21879" placeholder="INSERT INTO ${$db_table_prefix}permission_page_matches... " />
+                <marker date="1462119878000" expanded="true" signature="22437:22536" placeholder="SELECT id, p... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="22968:23067" placeholder="SELECT id, p... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="23462:23561" placeholder="DELETE FROM " />
+                <marker date="1462119878000" expanded="true" signature="24226:24319" placeholder="SELECT id, p... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="24944:25040" placeholder="SELECT permi... ${$db_table_prefix}" />
+                <marker date="1462119878000" expanded="true" signature="25740:26257" placeholder="SELECT blogl... whomadewho" />
+                <marker date="1462119878000" expanded="true" signature="27012:27405" placeholder="SELECT blogl... whomadewho" />
+                <marker date="1462119878000" expanded="true" signature="28033:28581" placeholder="SELECT blogl... whomadewho" />
+                <marker date="1462119878000" expanded="true" signature="29596:29736" placeholder="INSERT INTO bloglisting... " />
+                <marker date="1462119878000" expanded="true" signature="29888:29965" placeholder="INSERT INTO blogcontent... " />
+                <marker date="1462119878000" expanded="true" signature="30118:30201" placeholder="INSERT INTO whomadewho... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin_permissions.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="createblog.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/createblog.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-719">
+              <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+              <folding>
+                <marker date="1462120219000" expanded="true" signature="666:752" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="685:752" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="705:752" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="907:1219" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="977:1212" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="982:1044" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="1048:1136" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="1146:1205" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="viewblog.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/viewblog.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+              <folding>
+                <marker date="1462120219000" expanded="true" signature="164:265" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="183:265" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="203:265" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="366:377" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="464:475" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="viewmyblogs.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/viewmyblogs.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+              <folding>
+                <marker date="1462120219000" expanded="true" signature="142:243" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="161:243" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="181:243" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="301:461" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="324:461" placeholder="..." />
+                <marker date="1462120219000" expanded="true" signature="333:461" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin_permissions.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin_permissions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-60">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="495">
+              <caret line="44" column="21" selection-start-line="44" selection-start-column="14" selection-end-line="44" selection-end-column="21" />
               <folding>
                 <marker date="1360603610000" expanded="true" signature="1098:1243" placeholder="..." />
                 <marker date="1360603610000" expanded="true" signature="1117:1243" placeholder="..." />
@@ -128,8 +182,8 @@
             <state relative-caret-position="451">
               <caret line="111" column="12" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
               <folding>
-                <marker date="1461960676000" expanded="true" signature="664:734" placeholder="SELECT sign_... ${$db_table_prefix}" />
-                <marker date="1461960676000" expanded="true" signature="1800:1919" placeholder="SELECT id FR... ${$db_table_prefix}" />
+                <marker date="1462119167000" expanded="true" signature="664:734" placeholder="SELECT sign_... ${$db_table_prefix}" />
+                <marker date="1462119167000" expanded="true" signature="1800:1919" placeholder="SELECT id FR... ${$db_table_prefix}" />
               </folding>
             </state>
           </provider>
@@ -157,12 +211,12 @@
             <state relative-caret-position="270">
               <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
               <folding>
-                <marker date="1461962658000" expanded="true" signature="167:321" placeholder="..." />
-                <marker date="1461962658000" expanded="true" signature="429:648" placeholder="..." />
-                <marker date="1461962658000" expanded="true" signature="480:641" placeholder="..." />
-                <marker date="1461962658000" expanded="true" signature="765:1008" placeholder="..." />
-                <marker date="1461962658000" expanded="true" signature="1121:1364" placeholder="..." />
-                <marker date="1461962658000" expanded="true" signature="1425:1610" placeholder="..." />
+                <marker date="1462119167000" expanded="true" signature="167:321" placeholder="..." />
+                <marker date="1462119167000" expanded="true" signature="429:648" placeholder="..." />
+                <marker date="1462119167000" expanded="true" signature="480:641" placeholder="..." />
+                <marker date="1462119167000" expanded="true" signature="765:1008" placeholder="..." />
+                <marker date="1462119167000" expanded="true" signature="1121:1364" placeholder="..." />
+                <marker date="1462119167000" expanded="true" signature="1425:1610" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -180,6 +234,10 @@
         <option value="$PROJECT_DIR$/models/db-settings.php" />
         <option value="$PROJECT_DIR$/models/class.user.php" />
         <option value="$PROJECT_DIR$/left-nav.php" />
+        <option value="$PROJECT_DIR$/models/funcs.php" />
+        <option value="$PROJECT_DIR$/createblog.php" />
+        <option value="$PROJECT_DIR$/viewblog.php" />
+        <option value="$PROJECT_DIR$/viewmyblogs.php" />
       </list>
     </option>
   </component>
@@ -259,7 +317,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="web.server" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MyBlogWOCSS" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="FullScreen" value="true" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
@@ -316,12 +374,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1461957426810</updated>
-      <workItem from="1461957429034" duration="3743000" />
+      <workItem from="1461957429034" duration="4488000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3743000" />
+    <option name="totallyTimeSpent" value="4488000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -397,7 +455,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -407,8 +465,8 @@
         <state relative-caret-position="1486">
           <caret line="132" column="24" selection-start-line="132" selection-start-column="24" selection-end-line="132" selection-end-column="24" />
           <folding>
-            <marker date="1461958265000" expanded="true" signature="2923:3324" placeholder="INSERT INTO ${$db_table_prefix}users... " />
-            <marker date="1461958265000" expanded="true" signature="3649:3785" placeholder="INSERT INTO ${$db_table_prefix}user_permission_matches... " />
+            <marker date="1462119167000" expanded="true" signature="2923:3324" placeholder="INSERT INTO ${$db_table_prefix}users... " />
+            <marker date="1462119167000" expanded="true" signature="3649:3785" placeholder="INSERT INTO ${$db_table_prefix}user_permission_matches... " />
           </folding>
         </state>
       </provider>
@@ -434,8 +492,8 @@
         <state relative-caret-position="451">
           <caret line="111" column="12" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
           <folding>
-            <marker date="1461960676000" expanded="true" signature="664:734" placeholder="SELECT sign_... ${$db_table_prefix}" />
-            <marker date="1461960676000" expanded="true" signature="1800:1919" placeholder="SELECT id FR... ${$db_table_prefix}" />
+            <marker date="1462119167000" expanded="true" signature="664:734" placeholder="SELECT sign_... ${$db_table_prefix}" />
+            <marker date="1462119167000" expanded="true" signature="1800:1919" placeholder="SELECT id FR... ${$db_table_prefix}" />
           </folding>
         </state>
       </provider>
@@ -459,74 +517,126 @@
         <state relative-caret-position="270">
           <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding>
-            <marker date="1461962658000" expanded="true" signature="167:321" placeholder="..." />
-            <marker date="1461962658000" expanded="true" signature="429:648" placeholder="..." />
-            <marker date="1461962658000" expanded="true" signature="480:641" placeholder="..." />
-            <marker date="1461962658000" expanded="true" signature="765:1008" placeholder="..." />
-            <marker date="1461962658000" expanded="true" signature="1121:1364" placeholder="..." />
-            <marker date="1461962658000" expanded="true" signature="1425:1610" placeholder="..." />
+            <marker date="1462119167000" expanded="true" signature="167:321" placeholder="..." />
+            <marker date="1462119167000" expanded="true" signature="429:648" placeholder="..." />
+            <marker date="1462119167000" expanded="true" signature="480:641" placeholder="..." />
+            <marker date="1462119167000" expanded="true" signature="765:1008" placeholder="..." />
+            <marker date="1462119167000" expanded="true" signature="1121:1364" placeholder="..." />
+            <marker date="1462119167000" expanded="true" signature="1425:1610" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/models/funcs.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3450">
-          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+        <state relative-caret-position="1564">
+          <caret line="1380" column="1" selection-start-line="1380" selection-start-column="1" selection-end-line="1380" selection-end-column="1" />
           <folding>
-            <marker date="1360603860000" expanded="true" signature="2800:2860" placeholder="..." />
-            <marker date="1360603860000" expanded="true" signature="3040:3102" placeholder="..." />
-            <marker date="1360603860000" expanded="true" signature="3592:3645" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="3677:3753" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="4094:4177" placeholder="SELECT activ... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="4521:4597" placeholder="SELECT activ... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="4973:5069" placeholder="SELECT activ... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="5419:5644" placeholder="SELECT id, u... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="6622:6879" placeholder="SELECT id, u... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="8005:8131" placeholder="SELECT id, p... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="10826:10899" placeholder="SELECT activ... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="11243:11323" placeholder="SELECT activ... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="11724:11833" placeholder="SELECT activ... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="11878:12024" placeholder="SELECT activ... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="12512:12587" placeholder="INSERT INTO ${$db_table_prefix}permissions... " />
-            <marker date="1360603860000" expanded="true" signature="12856:12915" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="12947:13029" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="13061:13143" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="13713:13772" placeholder="SELECT id, n... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="14094:14180" placeholder="SELECT id, n... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="14522:14597" placeholder="SELECT id FR... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="14961:15038" placeholder="SELECT id FR... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="15890:16002" placeholder="INSERT INTO ${$db_table_prefix}user_permission_matches... " />
-            <marker date="1360603860000" expanded="true" signature="16548:16639" placeholder="SELECT id, u... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="17008:17107" placeholder="SELECT id, p... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="17532:17627" placeholder="SELECT id, u... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="18033:18132" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="19238:19307" placeholder="INSERT INTO ${$db_table_prefix}pages... " />
-            <marker date="1360603860000" expanded="true" signature="19535:19588" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="19620:19696" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="19992:20056" placeholder="SELECT id, p... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="20420:20511" placeholder="SELECT id, p... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="20858:20932" placeholder="SELECT priva... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="21767:21879" placeholder="INSERT INTO ${$db_table_prefix}permission_page_matches... " />
-            <marker date="1360603860000" expanded="true" signature="22437:22536" placeholder="SELECT id, p... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="22968:23067" placeholder="SELECT id, p... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="23462:23561" placeholder="DELETE FROM " />
-            <marker date="1360603860000" expanded="true" signature="24226:24319" placeholder="SELECT id, p... ${$db_table_prefix}" />
-            <marker date="1360603860000" expanded="true" signature="24944:25040" placeholder="SELECT permi... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="2800:2860" placeholder="..." />
+            <marker date="1462119878000" expanded="true" signature="3040:3102" placeholder="..." />
+            <marker date="1462119878000" expanded="true" signature="3592:3645" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="3677:3753" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="4094:4177" placeholder="SELECT activ... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="4521:4597" placeholder="SELECT activ... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="4973:5069" placeholder="SELECT activ... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="5419:5644" placeholder="SELECT id, u... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="6622:6879" placeholder="SELECT id, u... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="8005:8131" placeholder="SELECT id, p... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="10826:10899" placeholder="SELECT activ... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="11243:11323" placeholder="SELECT activ... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="11724:11833" placeholder="SELECT activ... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="11878:12024" placeholder="SELECT activ... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="12512:12587" placeholder="INSERT INTO ${$db_table_prefix}permissions... " />
+            <marker date="1462119878000" expanded="true" signature="12856:12915" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="12947:13029" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="13061:13143" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="13713:13772" placeholder="SELECT id, n... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="14094:14180" placeholder="SELECT id, n... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="14522:14597" placeholder="SELECT id FR... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="14961:15038" placeholder="SELECT id FR... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="15890:16002" placeholder="INSERT INTO ${$db_table_prefix}user_permission_matches... " />
+            <marker date="1462119878000" expanded="true" signature="16548:16639" placeholder="SELECT id, u... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="17008:17107" placeholder="SELECT id, p... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="17532:17627" placeholder="SELECT id, u... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="18033:18132" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="19238:19307" placeholder="INSERT INTO ${$db_table_prefix}pages... " />
+            <marker date="1462119878000" expanded="true" signature="19535:19588" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="19620:19696" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="19992:20056" placeholder="SELECT id, p... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="20420:20511" placeholder="SELECT id, p... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="20858:20932" placeholder="SELECT priva... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="21767:21879" placeholder="INSERT INTO ${$db_table_prefix}permission_page_matches... " />
+            <marker date="1462119878000" expanded="true" signature="22437:22536" placeholder="SELECT id, p... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="22968:23067" placeholder="SELECT id, p... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="23462:23561" placeholder="DELETE FROM " />
+            <marker date="1462119878000" expanded="true" signature="24226:24319" placeholder="SELECT id, p... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="24944:25040" placeholder="SELECT permi... ${$db_table_prefix}" />
+            <marker date="1462119878000" expanded="true" signature="25740:26257" placeholder="SELECT blogl... whomadewho" />
+            <marker date="1462119878000" expanded="true" signature="27012:27405" placeholder="SELECT blogl... whomadewho" />
+            <marker date="1462119878000" expanded="true" signature="28033:28581" placeholder="SELECT blogl... whomadewho" />
+            <marker date="1462119878000" expanded="true" signature="29596:29736" placeholder="INSERT INTO bloglisting... " />
+            <marker date="1462119878000" expanded="true" signature="29888:29965" placeholder="INSERT INTO blogcontent... " />
+            <marker date="1462119878000" expanded="true" signature="30118:30201" placeholder="INSERT INTO whomadewho... " />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin_permissions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-60">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="495">
+          <caret line="44" column="21" selection-start-line="44" selection-start-column="14" selection-end-line="44" selection-end-column="21" />
           <folding>
             <marker date="1360603610000" expanded="true" signature="1098:1243" placeholder="..." />
             <marker date="1360603610000" expanded="true" signature="1117:1243" placeholder="..." />
             <marker date="1360603610000" expanded="true" signature="1178:1243" placeholder="..." />
             <marker date="1360603610000" expanded="true" signature="1584:1781" placeholder="..." />
             <marker date="1360603610000" expanded="true" signature="1806:1886" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/createblog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-719">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding>
+            <marker date="1462120219000" expanded="true" signature="666:752" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="685:752" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="705:752" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="907:1219" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="977:1212" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="982:1044" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="1048:1136" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="1146:1205" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewblog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+          <folding>
+            <marker date="1462120219000" expanded="true" signature="164:265" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="183:265" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="203:265" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="366:377" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="464:475" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/viewmyblogs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+          <folding>
+            <marker date="1462120219000" expanded="true" signature="142:243" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="161:243" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="181:243" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="301:461" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="324:461" placeholder="..." />
+            <marker date="1462120219000" expanded="true" signature="333:461" placeholder="..." />
           </folding>
         </state>
       </provider>

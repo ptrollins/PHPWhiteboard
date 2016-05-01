@@ -1182,4 +1182,200 @@ function securePage($uri){
 	}
 }
 
-?>
+//function to fetch all the blogs that are available. currently not ordered, we can order it by date
+function fetchAllBlogs() {
+	global $mysqli,$db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		bloglisting.blogid,
+		bloglisting.title,
+	    bloglisting.datecreated,
+	    bloglisting.deleteflag,
+	    bloglisting.active,
+	    whomadewho.userid,
+	    blogcontent.blogcontent,
+	    UserDetails.UserName,
+	    UserDetails.FirstName,
+	    UserDetails.LastName,
+	    UserDetails.Email
+
+        FROM whomadewho INNER JOIN bloglisting ON whomadewho.blogid = bloglisting.blogid
+	 INNER JOIN UserDetails ON whomadewho.userid = UserDetails.UserID
+	 INNER JOIN blogcontent ON blogcontent.blogid = bloglisting.blogid
+		");
+
+	$stmt->execute();
+	$stmt->bind_result($blogid, $title, $datecreated, $deleteflag, $active, $userid, $blogcontent, $username, $firstname, $lastname, $email);
+	while ($stmt->fetch()){
+		$row[] = array('blogid' => $blogid,
+			'title' => $title,
+			'datecreated' => $datecreated,
+			'deleteflag' => $deleteflag,
+			'active' => $active,
+			'userid' => $userid,
+			'blogcontent' => $blogcontent,
+			'username' => $username,
+			'firstname' => $firstname,
+			'lastname' => $lastname,
+			'email'  => $email
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+
+
+// only fetch the blogs that the logged in user has created. Notice that we have used $loggedInUser
+function fetchMyBlogs() {
+	global $loggedInUser, $mysqli,$db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		bloglisting.blogid,
+		bloglisting.title,
+	    bloglisting.datecreated,
+	    bloglisting.deleteflag,
+	    bloglisting.active,
+	    whomadewho.userid,
+	    blogcontent.blogcontent
+
+        FROM whomadewho INNER JOIN bloglisting ON whomadewho.blogid = bloglisting.blogid
+	                    INNER JOIN blogcontent ON blogcontent.blogid = bloglisting.blogid
+		WHERE whomadewho.userid = ?");
+	$stmt->bind_param("s", $loggedInUser->user_id);
+	$stmt->execute();
+	$stmt->bind_result($blogid, $title, $datecreated, $deleteflag, $active, $userid, $blogcontent);
+	while ($stmt->fetch()){
+		$row[] = array('blogid'       => $blogid,
+			'title'        => $title,
+			'datecreated'  => $datecreated,
+			'deleteflag'   => $deleteflag,
+			'active'       => $active,
+			'userid'       => $userid,
+			'blogcontent'  => $blogcontent
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+
+
+
+// fetch a particular blog with blog id.
+function fetchThisBlog($blogid) {
+	global $loggedInUser, $mysqli,$db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		bloglisting.blogid,
+		bloglisting.title,
+	    bloglisting.datecreated,
+	    bloglisting.deleteflag,
+	    bloglisting.active,
+	    whomadewho.userid,
+	    blogcontent.blogcontent,
+	    UserDetails.UserName,
+	    UserDetails.FirstName,
+	    UserDetails.LastName,
+	    UserDetails.Email
+
+        FROM whomadewho INNER JOIN bloglisting ON whomadewho.blogid = bloglisting.blogid
+	 INNER JOIN UserDetails ON whomadewho.userid = UserDetails.UserID
+	 INNER JOIN blogcontent ON blogcontent.blogid = bloglisting.blogid
+		WHERE bloglisting.blogid = ?");
+	$stmt->bind_param("s", $blogid);
+	$stmt->execute();
+	$stmt->bind_result($blogid, $title, $datecreated, $deleteflag, $active, $userid, $blogcontent, $username, $firstname, $lastname, $email);
+	while ($stmt->fetch()){
+		$row = array('blogid'       => $blogid,
+			'title'        => $title,
+			'datecreated'  => $datecreated,
+			'deleteflag'   => $deleteflag,
+			'active'       => $active,
+			'userid'       => $userid,
+			'blogcontent'  => $blogcontent,
+			'username' => $username,
+			'firstname' => $firstname,
+			'lastname' => $lastname,
+			'email'  => $email
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+
+
+
+//create a blog, notice the similarity with create user.
+function createBlog($title, $blog){
+	global $loggedInUser, $mysqli,$db_table_prefix;
+
+
+	$character_array = array_merge(range(a, z), range(0, 9));
+	$rand_string = "";
+	for ($i = 0; $i < 6; $i++) {
+		$rand_string .= $character_array[rand(
+			0, (count($character_array) - 1)
+		)];
+	}
+	$inserted_blogid = $rand_string;
+
+	$stmt = $mysqli->prepare(
+		"INSERT INTO bloglisting (
+		blogid,
+		title,
+		datecreated,
+		deleteflag,
+		active
+		)
+		VALUES (
+		?,
+		?,
+		'" . time() . "',
+		0,
+		1
+		)"
+	);
+	$stmt->bind_param("ss",$inserted_blogid,$title);
+	$result = $stmt->execute();
+	$stmt->close();
+	//return $result;
+
+	$stmt = $mysqli->prepare(
+		"INSERT INTO blogcontent (
+		blogid,
+		blogcontent
+		)
+		VALUES (
+		?,
+		?
+		)"
+	);
+	$stmt->bind_param("ss",$inserted_blogid, $blog);
+	$result = $stmt->execute();
+	$stmt->close();
+	//return $result;
+
+
+	$stmt = $mysqli->prepare(
+		"INSERT INTO whomadewho (
+		blogid,
+		userid
+		)
+		VALUES (
+        ?,
+        ?
+		)"
+	);
+	$stmt->bind_param("ss",$inserted_blogid, $loggedInUser->user_id);
+	$result = $stmt->execute();
+	$stmt->close();
+	return $result;
+
+}
+
+
+//truncate characters on the front page for description.
+function truncate_chars($text, $limit, $ellipsis = '...') {
+	if( strlen($text) > $limit )
+		$text = trim(substr($text, 0, $limit)) . $ellipsis;
+	return $text;
+}
