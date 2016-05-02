@@ -2,6 +2,7 @@
 
 
 require_once("models/config.php");
+if (!securePage($_SERVER['PHP_SELF'])){die();}
 
 //print_r($_POST);
 //Forms posted

@@ -1275,15 +1275,16 @@ function securePage($uri){
 function fetchMyBlogs() {
 	global $loggedInUser, $mysqli, $db_table_prefix;
 	$stmt = $mysqli->prepare("SELECT
-		blog_id, 
+		discussion_id, 
 		blog_title, 
 		datetime, 
 		content
         FROM ".$db_table_prefix."discussion
-		WHERE userid = ?");
-	$stmt->bind_param("s", $loggedInUser->user_id);
+		WHERE user_id = ?");
+	$stmt->bind_param("i", $loggedInUser->user_id);
 	$stmt->execute();
 	$stmt->bind_result($blogid, $title, $datecreated, $content);
+
 	while ($stmt->fetch()){
 		$row[] = array('blogid'       => $blogid,
 			'title'       => $title,
@@ -1297,14 +1298,15 @@ function fetchMyBlogs() {
 
 function fetchClassBlogs() {
 	global $loggedInUser, $mysqli, $db_table_prefix;
+	$classid = intval($_SESSION['classid']);
 	$stmt = $mysqli->prepare("SELECT
-		blog_id, 
+		discussion_id, 
 		blog_title, 
 		datetime, 
 		content
         FROM ".$db_table_prefix."discussion
-		WHERE classid = ?");
-	$stmt->bind_param("s", $_SESSION['classid']);
+		WHERE class_id = ?");
+	$stmt->bind_param("i", $classid);
 	$stmt->execute();
 	$stmt->bind_result($blogid, $title, $datecreated, $content);
 	while ($stmt->fetch()){
@@ -1320,21 +1322,13 @@ function fetchClassBlogs() {
 
 
 //create a blog, notice the similarity with create user.
-function createBlog($title, $content){
+function createBlog($title, $content)
+{
 	global $loggedInUser, $mysqli, $db_table_prefix;
-	$classid = $_SESSION["classid"];
-
-	$character_array = array_merge(range('a', 'z'), range(0, 9));
-	$rand_string = "";
-	for ($i = 0; $i < 6; $i++) {
-		$rand_string .= $character_array[rand(
-			0, (count($character_array) - 1)
-		)];
-	}
-	//$inserted_blogid = $rand_string;
-
+	$classid = intval($_SESSION["classid"]);
+print(gettype($loggedInUser->user_id).gettype($classid).gettype($title).gettype($content));
 	$stmt = $mysqli->prepare(
-		"INSERT INTO ".$db_table_prefix."discussion (
+		"INSERT INTO ".$db_table_prefix."discussion(
 		user_id,
 		class_id,
 		blog_title,
@@ -1346,13 +1340,14 @@ function createBlog($title, $content){
 		?,
 		?,
 		'" . time() . "',
-		?,
+		?
 		)"
 	);
 	$stmt->bind_param("iiss", $loggedInUser->user_id, $classid, $title, $content);
 	$result = $stmt->execute();
 	$stmt->close();
 	return $result;
+}
 
 //	$stmt = $mysqli->prepare(
 //		"INSERT INTO blogcontent (
@@ -1383,9 +1378,8 @@ function createBlog($title, $content){
 //	$stmt->bind_param("ss",$inserted_blogid, $loggedInUser->user_id);
 //	$result = $stmt->execute();
 //	$stmt->close();
-//	return $result;
+//	return $result;}
 
-}
 
 //Other page functions
 //------------------------------------------------------------------------------

@@ -3,6 +3,10 @@
 UserCake Version: 2.0.2
 http://usercake.com
 */
+
+error_reporting(E_ALL);
+ini_set('display_errors','On');
+
 require_once("db-settings.php"); //Require DB connection
 
 //Retrieve settings
