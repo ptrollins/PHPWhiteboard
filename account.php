@@ -7,7 +7,7 @@ http://usercake.com
 require_once("models/config.php");
 if (!securePage($_SERVER['PHP_SELF'])){die();}
 require_once("models/header.php");
-
+$courses = fetchUserClasses();
 echo "
 <body>
     <div id='wrapper'>
@@ -15,7 +15,7 @@ echo "
             <div id='logo'></div>
         </div>
         <div id='content'>
-            <h1>UserCake</h1>
+            <h1>Whiteboard</h1>
             <h2>Account</h2>
             <div id='left-nav'>";
     
@@ -26,6 +26,12 @@ echo "
             <div id='main'>
             Hey, $loggedInUser->displayname. This is an example secure page designed to demonstrate some of the basic features of UserCake. Just so you know, your title at the moment is $loggedInUser->title, and that can be changed in the admin panel. You registered this account on " . date("M d, Y", $loggedInUser->signupTimeStamp()) . ".
             </div>
+            <table>";
+            foreach($courses as $course){
+                echo"<tr><td><a href='assignments.php?c=".$course['courseid']."'>".$course['coursename']."</a></td></tr>";
+            }
+            echo"
+            </table>
             <div id='bottom'></div>
     </div>
 </body>

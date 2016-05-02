@@ -141,7 +141,7 @@ echo "
 <div id='wrapper'>
 <div id='top'><div id='logo'></div></div>
 <div id='content'>
-<h1>UserCake</h1>
+<h1>Pace University</h1>
 <h2>Admin Configuration</h2>
 <div id='left-nav'>";
 

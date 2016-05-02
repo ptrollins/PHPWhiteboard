@@ -1,9 +1,10 @@
 html, body {
 	margin: 0px;
-	background: #fff;
+	background:  #700000
+;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:0.95em;
-	color:#4d4948;
+	color:#ffffff;
 }
 
 h1 {
@@ -15,9 +16,9 @@ h1 {
 
 h2 {
 	margin: 0;
-	text-align: center;
+
 	font-size: 120%;
-	padding: 0px;
+	padding: 10px;
 }
 
 h3 {
@@ -27,7 +28,7 @@ h3 {
 }
 
 a {
-	color:#4d4948;
+	color:#ffffff;
 }
 
 #top {
@@ -40,8 +41,9 @@ a {
 #logo {
 	margin: 0 auto 0 auto;
 	background:url('images/latest-build.gif');
-	width: 155px;
-	height: 124px;
+
+	width: 270px;
+	height: 116px;
 }
 
 #content {
@@ -91,7 +93,7 @@ a {
 }
 
 table.admin td {
-	vertical-align: top;	
+	vertical-align: top;
 }
 
 #error {

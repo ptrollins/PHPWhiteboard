@@ -19,12 +19,17 @@ if(isUserLoggedIn()) {
 	if ($loggedInUser->checkPermission(array(1))){
 		echo "
 	<ul>
-	<li><a href='account.php'>Classes</a></li>
+	<li><a href='account.php'>Classes</a></li>";
+		
+	if (isset($_SESSION['classid']) && !empty($_SESSION['classid'])) {
+		echo "
 		<ul>
 		<li><a href='documents.php'>Documents</a></li>
-		<li><a href='assignments.php'>Assignments</a></li>
-		<li><a href='discussion.php'>Discussion</a></li>
-		</ul>
+		<li><a href='assignments.php?c=".$_SESSION['classid']."'>Assignments</a></li>
+		<li><a href='viewblog.php'>Discussion</a></li>
+		</ul>";
+	}
+	echo"
 	</ul>";
 	}
 
