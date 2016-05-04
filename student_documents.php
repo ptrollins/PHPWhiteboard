@@ -31,7 +31,9 @@ echo "
 
 //  $courseid
 
-$courseid = 610;
+$courseid = intval($_SESSION['classid']);
+
+
 $course_info = array("name", "url");
 
 /*
