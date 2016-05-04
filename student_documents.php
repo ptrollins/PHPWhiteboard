@@ -8,8 +8,15 @@
 require_once("models/config.php");
 if (!securePage($_SERVER['PHP_SELF'])){die();}
 
-require_once("models/header.php");
+$courseid = intval($_SESSION['classid']);
+$course_info = array("name", "url");
+$documents = fetchDocumentByCourseId($courseid);
 
+//$arrlength = count($courseinfo_array);
+//$courseinfo_array = fetchStudentCouseId($couseid);
+//print_r($courseinfo_array);
+
+require_once("models/header.php");
 echo "
 <body>
 <div id='wrapper'>
@@ -25,42 +32,11 @@ echo "
 </div>
 <div id='main'>";
 
-//  get the $student_id
-
-//$couseid_row = fetchStudentCouseId($student_id);
-
-//  $courseid
-
-$courseid = intval($_SESSION['classid']);
-
-
-$course_info = array("name", "url");
-
-/*
-foreach ($courseid_row as $course_id) {
-
-}
-*/
-
-
-$courseinfo_array = fetchDocumentbyCourseId($courseid);
-
-//$arrlength = count($courseinfo_array);
-
-//$courseinfo_array = fetchStudentCouseId($couseid);
-
-
-print_r($courseinfo_array);
-
-
-foreach ($courseinfo_array as $ci) {
+foreach ($documents as $d) {
     echo "
 	<tr>
-    <td><p>Documents</p><a href=".$ci['url'].">".$ci['name']."</a></td>
+    <td><p>Documents</p><a href=".$d['url'].">".$d['name']."</a></td>
 	</tr>";
 }
 
-
-
-//
 ?>

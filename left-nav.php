@@ -26,7 +26,7 @@ if(isUserLoggedIn()) {
 	if (isset($_SESSION['classid']) && !empty($_SESSION['classid'])) {
 		echo "
 		<ul>
-		<li><a href='documents.php'>Documents</a></li>
+		<li><a href='student_documents.php'>Documents</a></li>
 		<li><a href='assignments.php?c=".$_SESSION['classid']."'>Assignments</a></li>
 		<li><a href='discussion.php'>Discussion</a></li>
 		</ul>";

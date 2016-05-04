@@ -1704,125 +1704,67 @@ function truncate_chars($text, $limit, $ellipsis = '...') {
 	return $text;
 }
 
-
+//---------------------------------------------
 
 function fetchStudentCouseId($studentid)
 {
-	$courseid = 0;
-
 	global $mysqli,$db_table_prefix;
 	$stmt = $mysqli->prepare("SELECT
 		course_id
 		FROM ".$db_table_prefix."users
 		WHERE
 		student_id = ?");
-	//LIMIT 1
 	$stmt->bind_param("i", $studentid);
-
 	$stmt->execute();
 	$stmt->bind_result($couseid);
-
-
-
 
 	while ($stmt->fetch()){
 		$row = array("course_id" => $courseid);
 	}
-
-	print $row;
-
 	$stmt->close();
 	return ($row);
 }
 
 
-
-function fetchDocumentbyCourseId($courseid)
+function fetchDocumentByCourseId($courseid)
 {
 	global $mysqli, $db_table_prefix;
-
-	//$course_name = "";
-	//$course_url = "";
-
 	$stmt = $mysqli->prepare("SELECT name, url
       FROM ".$db_table_prefix."documents
       WHERE course_id = ? LIMIT 1");
-
 	$stmt->bind_param("i", $courseid);
-
 	$result = $stmt->execute();
-
 	$stmt->bind_result($course_name, $course_url);
-
-	print("afterbind                ");
-	//print_r($stmt);
-
-	echo "<br>";
-	//echo $course_url;
-
-
-	print("12345              ");
 	while ($stmt->fetch()) {
 		$row[] = array(
 			'name'    => $course_name,
 			'url'     => $course_url
 		);
 	}
-
-	print("afterfetch                ");
-	echo "<pre>";
-	print_r($row[0]['name']);
-	echo "<br>";
-	print_r($row[0]['url']);
-	echo "</pre>";
-	echo "<br>";
-	//echo $row['url'];
-
-	//print_r($row);
-
-	print("12345              ");
-
-
 	$stmt->close();
-
-
 
 	return $row;
 }
 
-
-
-function fetchAssignmentbyCourseId($courseid)
-{
-	global $mysqli, $db_table_prefix;
-
-	//$course_name = "";
-	//$course_url = "";
-
-	$stmt = $mysqli->prepare("SELECT name, description, due_date
-      FROM ".$db_table_prefix."assignments
-      WHERE course_id = ? LIMIT 1");
-
-	$stmt->bind_param("i", $courseid);
-
-	$result = $stmt->execute();
-
-	$stmt->bind_result($assignment_name, $assignment_des, $assignment_due);
-
-	print "afterbind";
-	print($course_name."b");
-	print_r($course_url."c");
-
-	while ($stmt->fetch()) {
-		$row[] = array(
-			'name'    => $assignment_name,
-			'des'     => $assignment_des,
-			'due'     => $assignment_due
-		);
-	}
-
-	$stmt->close();
-	return $row;
-}
+//function fetchAssignmentbyCourseId($courseid)
+//{
+//	global $mysqli, $db_table_prefix;
+//
+//	$stmt = $mysqli->prepare("SELECT name, description, due_date
+//      FROM ".$db_table_prefix."assignments
+//      WHERE course_id = ? LIMIT 1");
+//	$stmt->bind_param("i", $courseid);
+//	$result = $stmt->execute();
+//	$stmt->bind_result($assignment_name, $assignment_des, $assignment_due);
+//	while ($stmt->fetch()) {
+//		$row[] = array(
+//			'name'    => $assignment_name,
+//			'des'     => $assignment_des,
+//			'due'     => $assignment_due
+//		);
+//	}
+//	$stmt->close();
+//	return $row;
+//}
 
 ?>
