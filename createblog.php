@@ -55,10 +55,14 @@ echo "
 
 <div id='main'>";
 
-echo "<pre>";
-print_r($errors);
-print_r($successes);
-echo "</pre>";
+
+foreach ($successes as $s){
+  echo ucfirst($s).".<br>";
+}
+foreach ($errors as $e){
+  echo ucfirst($e).".<br>";
+}
+
 
 echo "
 <div id='regbox'>

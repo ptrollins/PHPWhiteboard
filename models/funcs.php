@@ -181,7 +181,7 @@ function sanitize($str)
 
 //Delete a defined array of users
 function deleteUsers($users) {
-	global $mysqli,$db_table_prefix; 
+	global $mysqli,$db_table_prefix;
 	$i = 0;
 	$stmt = $mysqli->prepare("DELETE FROM ".$db_table_prefix."users 
 		WHERE id = ?");
@@ -1118,7 +1118,7 @@ function removePage($page, $permission) {
 
 //Check if a user has access to a page
 function securePage($uri){
-	
+	$master_account = -1;
 	//Separate document name from uri
 	$tokens = explode('/', $uri);
 	$page = $tokens[sizeof($tokens)-1];
@@ -1229,45 +1229,28 @@ function securePage($uri){
 
 
 // fetch a particular blog with blog id.
-//function fetchThisBlog($blogid) {
-//	global $loggedInUser, $mysqli,$db_table_prefix;
-//	$stmt = $mysqli->prepare("SELECT
-//		bloglisting.blogid,
-//		bloglisting.title,
-//	    bloglisting.datecreated,
-//	    bloglisting.deleteflag,
-//	    bloglisting.active,
-//	    whomadewho.userid,
-//	    blogcontent.blogcontent,
-//	    UserDetails.UserName,
-//	    UserDetails.FirstName,
-//	    UserDetails.LastName,
-//	    UserDetails.Email
-//
-//        FROM whomadewho INNER JOIN bloglisting ON whomadewho.blogid = bloglisting.blogid
-//	 INNER JOIN UserDetails ON whomadewho.userid = UserDetails.UserID
-//	 INNER JOIN blogcontent ON blogcontent.blogid = bloglisting.blogid
-//		WHERE bloglisting.blogid = ?");
-//	$stmt->bind_param("s", $blogid);
-//	$stmt->execute();
-//	$stmt->bind_result($blogid, $title, $datecreated, $deleteflag, $active, $userid, $blogcontent, $username, $firstname, $lastname, $email);
-//	while ($stmt->fetch()){
-//		$row = array('blogid'       => $blogid,
-//			'title'        => $title,
-//			'datecreated'  => $datecreated,
-//			'deleteflag'   => $deleteflag,
-//			'active'       => $active,
-//			'userid'       => $userid,
-//			'blogcontent'  => $blogcontent,
-//			'username' => $username,
-//			'firstname' => $firstname,
-//			'lastname' => $lastname,
-//			'email'  => $email
-//		);
-//	}
-//	$stmt->close();
-//	return ($row);
-//}
+function fetchThisBlog($blogid) {
+	global $loggedInUser, $mysqli,$db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		discussion_id, 
+		blog_title, 
+		datetime, 
+		content
+        FROM ".$db_table_prefix."discussion
+		WHERE discussion_id = ?");
+	$stmt->bind_param("s", $blogid);
+	$stmt->execute();
+	$stmt->bind_result($blogid, $title, $datecreated, $blogcontent);
+	while ($stmt->fetch()){
+		$row = array('blogid'       => $blogid,
+			'title'        => $title,
+			'datecreated'  => $datecreated,
+			'blogcontent'  => $blogcontent
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
 
 
 
@@ -1298,25 +1281,30 @@ function fetchMyBlogs() {
 
 function fetchClassBlogs() {
 	global $loggedInUser, $mysqli, $db_table_prefix;
+
 	$classid = intval($_SESSION['classid']);
 	$stmt = $mysqli->prepare("SELECT
 		discussion_id, 
 		blog_title, 
 		datetime, 
-		content
-        FROM ".$db_table_prefix."discussion
+		content,
+		display_name
+        FROM ".$db_table_prefix."discussion d1
+        INNER JOIN ".$db_table_prefix."users u1 ON d1.user_id = u1.id
 		WHERE class_id = ?");
 	$stmt->bind_param("i", $classid);
 	$stmt->execute();
-	$stmt->bind_result($blogid, $title, $datecreated, $content);
+	$stmt->bind_result($blogid, $title, $datecreated, $content, $username);
 	while ($stmt->fetch()){
 		$row[] = array('blogid'       => $blogid,
-			'title'       => $title,
-			'datetime'    => $datecreated,
-			'content'     => $content
+			'title'       	=> $title,
+			'datetime'    	=> $datecreated,
+			'content'   	=> $content,
+			'username'		=> $username
 		);
 	}
 	$stmt->close();
+
 	return ($row);
 }
 
@@ -1386,7 +1374,7 @@ print(gettype($loggedInUser->user_id).gettype($classid).gettype($title).gettype(
 function fetchUserClasses() {
 	global $loggedInUser, $mysqli, $db_table_prefix;
 	$stmt = $mysqli->prepare("SELECT
-		c1.id, c1.instructor_id, c1.name, c1.schedule, c1.classroom
+		c1.id, c1.instructor_id, c1.course_title, c1.schedule, c1.classroom
         FROM ".$db_table_prefix."courses c1
          INNER JOIN ".$db_table_prefix."course_student cs ON c1.id = cs.course_id
 		WHERE cs.student_id = ?");
@@ -1404,6 +1392,239 @@ function fetchUserClasses() {
 	}
 	$stmt->close();
 	return ($row);
+}
+
+function fetchInstructorClasses() {
+	global $loggedInUser, $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		id, instructor_id, course_title, schedule, classroom
+        FROM ".$db_table_prefix."courses
+		WHERE instructor_id = ?");
+	$stmt->bind_param("s", $loggedInUser->user_id);
+	$stmt->execute();
+	$stmt->bind_result($courseid, $instructorid, $coursename, $coursesched, $courseroom);
+	while ($stmt->fetch()){
+		$row[] = array(
+			'courseid'     => $courseid,
+			'instructorid' => $instructorid,
+			'coursename'   => $coursename,
+			'coursesched'  => $coursesched,
+			'courseroom'   => $courseroom
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+function fetchAllClasses() {
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		id, instructor_id, course_title, schedule, classroom
+        FROM ".$db_table_prefix."courses");
+	$stmt->execute();
+	$stmt->bind_result($courseid, $instructorid, $coursename, $coursesched, $courseroom);
+	while ($stmt->fetch()){
+		$row[] = array(
+			'courseid'     => $courseid,
+			'instructorid' => $instructorid,
+			'coursename'   => $coursename,
+			'coursesched'  => $coursesched,
+			'courseroom'   => $courseroom
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+function fetchInstructors(){
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		u1.id , u1.display_name
+        FROM ".$db_table_prefix."users u1
+         INNER JOIN (SELECT user_ID, permission_id FROM ".$db_table_prefix."user_permission_matches WHERE permission_id = 3) up1 
+         ON u1.id = up1.user_id
+		WHERE up1.user_id NOT IN (
+			SELECT DISTINCT user_id 
+			FROM ".$db_table_prefix."user_permission_matches
+			WHERE permission_id = 2)");
+	$stmt->execute();
+	$stmt->bind_result($instrid, $instrname);
+	while ($stmt->fetch()){
+		$row[] = array(
+			'instrid' => $instrid,
+			'instrname'   => $instrname
+		);
+	}
+	$stmt->close();
+
+	return ($row);
+}
+
+function fetchAllStudents(){
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		u1.id, u1.display_name
+        FROM ".$db_table_prefix."users u1
+         INNER JOIN ".$db_table_prefix."user_permission_matches up1 
+         ON u1.id = up1.user_id
+		WHERE up1.user_id NOT IN(
+			SELECT DISTINCT user_id 
+			FROM ".$db_table_prefix."user_permission_matches
+			WHERE permission_id > 1)");
+	$stmt->execute();
+	$stmt->bind_result($studid, $studname);
+	while ($stmt->fetch()){
+		$row[] = array(
+			'studid'	 => $studid,
+			'studname'   => $studname
+		);
+	}
+	$stmt->close();
+
+	return ($row);
+}
+
+function fetchUserAssignments($courseid) {
+	global $loggedInUser, $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		a1.course_id, a1.assignment_name, a1.description, a1.due_date, as1.assignment_id, as1.user_id, as1.uploade_date, 
+		as1.url
+        FROM ".$db_table_prefix."assignments a1
+         JOIN ".$db_table_prefix."assignment_submissions as1 ON a1.id = as1.assignment_id
+		WHERE cs.student_id = ? AND a1.course_id = ?");
+	$stmt->bind_param("si", $loggedInUser->user_id, $courseid);
+	$stmt->execute();
+	$stmt->bind_result($courseid, $assignname, $description, $duedate, $assignid, $userid, $uploaddate, $url);
+	while ($stmt->fetch()){
+		$row[] = array(
+			'courseid'    	=> $courseid,
+			'assignname' 	=> $assignname,
+			'description'   => $description,
+			'duedate'  		=> $duedate,
+			'assignid'   	=> $assignid,
+			'userid'     	=> $userid,
+			'uploaddate' 	=> $uploaddate,
+			'url'   		=> $url
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+function fetchAllAssignments($courseid) {
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		a1.course_id, a1.assignment_name, a1.description, a1.due_date, as1.assignment_id, as1.user_id, as1.uploade_date, 
+		as1.url
+        FROM ".$db_table_prefix."assignments a1
+         JOIN ".$db_table_prefix."assignment_submissions as1 ON a1.id = as1.assignment_id
+		WHERE a1.course_id = ?");
+	$stmt->bind_param("i", $courseid);
+	$stmt->execute();
+	$stmt->bind_result($courseid, $assignname, $description, $duedate, $assignid, $userid, $uploaddate, $url);
+	while ($stmt->fetch()){
+		$row[] = array(
+			'courseid'    	=> $courseid,
+			'assignname' 	=> $assignname,
+			'description'   => $description,
+			'duedate'  		=> $duedate,
+			'assignid'   	=> $assignid,
+			'userid'     	=> $userid,
+			'uploaddate' 	=> $uploaddate,
+			'url'   		=> $url
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+function fetchRoster($courseid) {
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		u1.display_name, u1.email, u1.last_sign_in_stamp
+        FROM ".$db_table_prefix."users u1
+         JOIN ".$db_table_prefix."course_student cs1 ON u1.id = cs1.student_id
+		WHERE cs1.course_id = ?");
+	$stmt->bind_param("i", $courseid);
+	$stmt->execute();
+	$stmt->bind_result($display_name, $email, $timestamp);
+	while ($stmt->fetch()){
+		$row[] = array(
+			'display_name'    		=> $display_name,
+			'email' 				=> $email,
+			'last_sign_in_stamp' 	=> $timestamp
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+//create a new assignment.
+function createAssignment($courseid, $assignname, $description, $duedate)
+{
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare(
+		"INSERT INTO ".$db_table_prefix."assignments (
+		course_id,
+		assignment_name,
+		description,
+		due_date
+		)
+		VALUES (
+		?,
+		?,
+		?,
+		?
+		)"
+	);
+	$stmt->bind_param("isss", $courseid, $assignname, $description, $duedate);
+	$result = $stmt->execute();
+	$stmt->close();
+	return $result;
+}
+
+//create a new course, notice the similarity with create user.
+function createCourse($coursename, $instructor, $schedule, $location)
+{
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare(
+		"INSERT INTO ".$db_table_prefix."courses (
+		course_title,
+		instructor_id,
+		schedule,
+		classroom
+		)
+		VALUES (
+		?,
+		?,
+		?,
+		?
+		)"
+	);
+	$stmt->bind_param("siss", $coursename, $instructor, $schedule, $location);
+	$result = $stmt->execute();
+	$stmt->close();
+	return $result;
+}
+
+//create a new course, notice the similarity with create user.
+function addStudent($studentid, $courseid)
+{
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare(
+		"INSERT INTO ".$db_table_prefix."course_student (
+		course_id,
+		student_id
+		)
+		VALUES (
+		?,
+		?
+		)"
+	);
+	$stmt->bind_param("ii", $courseid, $studentid);
+	$result = $stmt->execute();
+	$stmt->close();
+	return $result;
 }
 
 //truncate characters on the front page for description.

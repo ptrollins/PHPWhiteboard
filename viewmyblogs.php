@@ -3,6 +3,7 @@
 
 
 require_once("models/config.php");
+if (!securePage($_SERVER['PHP_SELF'])){die();}
 require_once("models/header.php");
 
 $myblogs = fetchMyBlogs();
@@ -32,17 +33,20 @@ echo "
         <th>Publish</th>
         <th>Delete</th>
     </tr>";
-    foreach($myblogs as $displayblog)
-    {
-      echo '<tr>';
-      echo '<td>'. $displayblog['blogid'] .'</td>';
-      echo '<td>'. $displayblog['title'] .'</td>';
-      echo '<td><a href="viewblog.php?blogid='.$displayblog['blogid'].'">View</a></td>';
-      echo '<td align="center"><a href="publish.php?blogid='.$displayblog['blogid'].'">'.$displayblog['active'].'</a></td>';
-      echo '<td><a href="deleteblog.php?blogid='.$displayblog['blogid'].'">Delete</a></td>';
-      echo '</tr>';
-    }
+foreach($myblogs as $displayblog)
+{
+    echo '<tr>';
+    echo '<td>'. $displayblog['blogid'] .'</td>';
+    echo '<td>'. $displayblog['title'] .'</td>';
+    echo '<td><a href="viewblog.php?blogid='.$displayblog['blogid'].'">View</a></td>';
+    echo '<td align="center"><a href="publish.php?blogid='.$displayblog['blogid'].'">'.$displayblog['active'].'</a></td>';
+    echo '<td><a href="deleteblog.php?blogid='.$displayblog['blogid'].'">Delete</a></td>';
+    echo '</tr>';
+}
 
-
-
-echo "</table>";
+echo "</table>
+</div>
+<div id='bottom'></div>
+</div>
+</body>
+</html>";

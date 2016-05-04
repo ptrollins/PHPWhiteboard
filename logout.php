@@ -7,11 +7,13 @@ http://usercake.com
 require_once("models/config.php");
 if (!securePage($_SERVER['PHP_SELF'])){die();}
 
+destroySession("classid");
 //Log the user out
 if(isUserLoggedIn())
 {
 	$loggedInUser->userLogOut();
 }
+
 
 if(!empty($websiteUrl)) 
 {

@@ -26,7 +26,7 @@ if(isUserLoggedIn()) {
 		<ul>
 		<li><a href='documents.php'>Documents</a></li>
 		<li><a href='assignments.php?c=".$_SESSION['classid']."'>Assignments</a></li>
-		<li><a href='viewblog.php'>Discussion</a></li>
+		<li><a href='discussion.php'>Discussion</a></li>
 		</ul>";
 	}
 	echo"
@@ -41,20 +41,19 @@ if(isUserLoggedIn()) {
 	<li><a href='admin_users.php'>Admin Users</a></li>
 	<li><a href='admin_permissions.php'>Admin Permissions</a></li>
 	<li><a href='admin_pages.php'>Admin Pages</a></li>
+	<li><a href='create_class.php'>Admin Courses</a></li>
 	</ul>";
 	}
 
 	//Links for permission level 3 (instructor)
-	if ($loggedInUser->checkPermission(array(3))){
-	echo "
-	<ul>
-	<li><a href='admin_configuration.php'>Admin Configuration</a></li>
-	<li><a href='admin_users.php'>Admin Users</a></li>
-	<li><a href='admin_permissions.php'>Admin Permissions</a></li>
-	<li><a href='admin_pages.php'>Admin Pages</a></li>
-	</ul>";
+	if ($loggedInUser->checkPermission(array(3)) && isset($_SESSION['classid'])){
+		echo"
+		<ul>
+			<li><a href='assignment_create.php'>Create Assignment</a></li>
+		</ul>
+		";
 	}
-} 
+}
 //Links for users not logged in
 else {
 	echo "
