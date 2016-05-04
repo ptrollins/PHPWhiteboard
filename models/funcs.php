@@ -2790,14 +2790,60 @@ function fetchAllStudents(){
 	return ($row);
 }
 
-function fetchUserAssignments($courseid) {
+//function fetchUserAssignments($courseid) {
+//	global $loggedInUser, $mysqli, $db_table_prefix;
+//	$stmt = $mysqli->prepare("SELECT
+//		a1.course_id, a1.assignment_name, a1.description, a1.due_date, as1.assignment_id, as1.user_id, as1.uploade_date,
+//		as1.url
+//        FROM ".$db_table_prefix."assignments a1
+//         JOIN ".$db_table_prefix."assignment_submissions as1 ON a1.id = as1.assignment_id
+//		WHERE cs.student_id = ? AND a1.course_id = ?");
+//	$stmt->bind_param("i", $courseid);
+//	$stmt->execute();
+//	$stmt->bind_result($courseid, $assignname, $description, $duedate);
+//	while ($stmt->fetch()){
+//		$row[] = array(
+//			'courseid'    	=> $courseid,
+//			'assignname' 	=> $assignname,
+//			'description'   => $description,
+//			'duedate'  		=> $duedate
+//		);
+//	}
+//	$stmt->close();
+//	return ($row);
+//}
+
+
+function fetchAllAssignments($courseid) {
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare("SELECT
+		id, course_id, assignment_name, description, due_date
+        FROM  ".$db_table_prefix."assignments
+		WHERE course_id = ?");
+	$stmt->bind_param("i", $courseid);
+	$stmt->execute();
+	$stmt->bind_result($assignid, $courseid, $assignname, $description, $duedate);
+	while ($stmt->fetch()){
+		$row[] = array(
+			'assignid'    	=> $assignid,
+			'courseid'    	=> $courseid,
+			'assignname' 	=> $assignname,
+			'description'   => $description,
+			'duedate'  		=> $duedate
+		);
+	}
+	$stmt->close();
+	return ($row);
+}
+
+function fetchUserSubmissions($courseid) {
 	global $loggedInUser, $mysqli, $db_table_prefix;
 	$stmt = $mysqli->prepare("SELECT
-		a1.course_id, a1.assignment_name, a1.description, a1.due_date, as1.assignment_id, as1.user_id, as1.uploade_date, 
+		a1.course_id, a1.assignment_name, a1.description, a1.due_date, as1.assignment_id, as1.user_id, as1.upload_date, 
 		as1.url
         FROM ".$db_table_prefix."assignments a1
          JOIN ".$db_table_prefix."assignment_submissions as1 ON a1.id = as1.assignment_id
-		WHERE cs.student_id = ? AND a1.course_id = ?");
+		WHERE as1.user_id = ? AND a1.course_id = ?");
 	$stmt->bind_param("si", $loggedInUser->user_id, $courseid);
 	$stmt->execute();
 	$stmt->bind_result($courseid, $assignname, $description, $duedate, $assignid, $userid, $uploaddate, $url);
@@ -2817,10 +2863,10 @@ function fetchUserAssignments($courseid) {
 	return ($row);
 }
 
-function fetchAllAssignments($courseid) {
+function fetchAllSubmissions($courseid) {
 	global $mysqli, $db_table_prefix;
 	$stmt = $mysqli->prepare("SELECT
-		a1.course_id, a1.assignment_name, a1.description, a1.due_date, as1.assignment_id, as1.user_id, as1.uploade_date, 
+		a1.course_id, a1.assignment_name, a1.description, a1.due_date, as1.assignment_id, as1.user_id, as1.upload_date, 
 		as1.url
         FROM ".$db_table_prefix."assignments a1
          JOIN ".$db_table_prefix."assignment_submissions as1 ON a1.id = as1.assignment_id
@@ -2884,6 +2930,29 @@ function createAssignment($courseid, $assignname, $description, $duedate)
 		)"
 	);
 	$stmt->bind_param("isss", $courseid, $assignname, $description, $duedate);
+	$result = $stmt->execute();
+	$stmt->close();
+	return $result;
+}
+
+function submitAssignment($assignid, $userid, $uploaddate, $url)
+{
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare(
+		"INSERT INTO ".$db_table_prefix."assignment_submissions (
+		assignment_id,
+		user_id,
+		upload_date,
+		url
+		)
+		VALUES (
+		?,
+		?,
+		?,
+		?
+		)"
+	);
+	$stmt->bind_param("iiss", $assignid, $userid, $uploaddate, $url);
 	$result = $stmt->execute();
 	$stmt->close();
 	return $result;
