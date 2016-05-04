@@ -9,6 +9,8 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 //Links for logged in user
 if(isUserLoggedIn()) {
 	echo "
+	<h3>".$loggedInUser->displayname."</h3>
+	<br>
 	<ul>
 	<li><a href='account.php'>Account Home</a></li>
 	<li><a href='user_settings.php'>User Settings</a></li>

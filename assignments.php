@@ -7,8 +7,10 @@ $_SESSION['classid']=$_GET['c'];
 $classid = intval($_SESSION['classid']);
 if ($loggedInUser->checkPermission(array(2,3))){
     $assignments = fetchAllAssignments($classid);
+    $submissions = fetchAllSubmissions($classid);
 }else{
-    $assignments = fetchUserAssignments($classid);
+    $assignments = fetchAllAssignments($classid);
+    $submissions = fetchUserSubmissions($classid);
 }
 
 echo "
@@ -27,13 +29,34 @@ include("left-nav.php");
 echo "      </div>
             <div id='main'>
             <table>";
-            if(isset($courses)){
-                foreach($courses as $course){
-                    echo"<tr><td><a href='assignments.php?c=".$course['courseid']."'>".$course['coursename']."</a></td></tr>";
+            if(isset($assignments)){
+                foreach($assignments as $assignment){
+                    echo"<tr>
+                    <td><a href='assignment_submit.php?a=".$assignment['assignid']."'>".$assignment['assignname']."</a></td>
+                    <td>".$assignment['description']."</td>
+                    <td>".date("j M, Y", strtotime($assignment['duedate']))."</td>
+                    </tr>";
                 }
             }
             echo"
-            </table>            </div>
+            </table> 
+                      <br>
+             <table>
+                <tr>
+                    <th>Assignment</th><th>Due Date</th><th>Upload Date</th>
+                </tr>";
+            if(isset($submissions)){
+                foreach($submissions as $submission){
+                    echo"<tr>
+                    <td><a href=".$submission['url'].">".$submission['assignname']."</a></td>
+                    <td>".date("j M, Y", strtotime($submission['uploaddate']))."</td>
+                    <td>".date("j M, Y", strtotime($submission['duedate']))."</td>
+                    </tr>";
+                }
+            }
+            echo"
+            </table>     
+             </div>
             
             <div id='bottom'></div>
     </div>

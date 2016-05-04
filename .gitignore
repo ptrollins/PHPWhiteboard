@@ -74,3 +74,7 @@ fabric.properties
 /app/Config/core.php
 /app/Config/database.php
 /vendors/*
+
+# Other
+/documents
+/assignments

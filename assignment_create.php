@@ -13,8 +13,8 @@ if(!empty($_POST))
     $errors = array();
     $assignname = trim($_POST["assignname"]);
     $description = trim($_POST["description"]);
-    $duedate = trim($_POST["duedate"]);
-
+    //$duedate = trim($_POST["duedate"]);
+    $duedate = date('Y-m-d', strtotime($_POST["duedate"]));
 
     if($assignname == "")
     {
@@ -34,9 +34,8 @@ if(!empty($_POST))
     //End data validation
     if(count($errors) == 0)
     {
-        $createBlog = createCourse($coursename, $instructor, $schedule, $location);
-        print_r($createBlog);
-        if($createBlog <> 1){
+        $createAssignment  = createAssignment($classid, $assignname, $description, $duedate);
+        if($createAssignment <> 1){
             $errors[] = "OOOPPSS!! your assignment could not be created";
         }
 
