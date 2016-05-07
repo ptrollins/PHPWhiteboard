@@ -5,9 +5,6 @@ if (!securePage($_SERVER['PHP_SELF'])) {
     die();
 }
 
-$courseid = intval($_SESSION['classid']);
-$documents = fetchDocumentByCourseId($courseid);
-
 require_once("models/header.php");
 echo "
 <body>
@@ -15,7 +12,7 @@ echo "
         <div id='top'><div id='logo'></div></div>
         <div id='content'>
             <h1>Whiteboard</h1>
-            <h2>Documents</h2>
+            <h2>Upload Documents</h2>
             <div id='left-nav'>";
 
             include("left-nav.php");
@@ -24,16 +21,16 @@ echo "
             </div>
             <div id='main'>
             
-                <form name='uploadDoc' action='processUpload.php' method='post' enctype='multipart/form-data'>
-                <table>
-                <tr>
-                <th>Upload Document</th>
-                <th><input type='file' name='document'></th>
-                </tr>
-                <tr>
-                <th><input type='submit' name='submit' value='Upload'></th>
-                </tr>
-                </table>
+                <form name='uploadDoc' action='documents.php' method='post' enctype='multipart/form-data'>
+                <p>
+                    <label>Document Name</label>
+                    <input type='text' name='docname'>
+                </p><br>
+                <p>
+                    <label>Select file:</label>
+                    <input type='file' name='uploadFile' />
+                </p><br>
+                <p><input type='submit' name='submit' value='Submit'></p>
                 </form>
             
             </div>
@@ -42,4 +39,3 @@ echo "
     </div>
 </body>
 </html>";
-?>

@@ -1728,7 +1728,25 @@ function truncate_chars($text, $limit, $ellipsis = '...') {
 //	$stmt->close();
 //	return ($row);
 //}
-
+function addDocument($classid, $docname, $url){
+	global $mysqli, $db_table_prefix;
+	$stmt = $mysqli->prepare(
+		"INSERT INTO ".$db_table_prefix."documents (
+		course_id,
+		docname,
+		url
+		)
+		VALUES (
+		?,
+		?,
+		?
+		)"
+	);
+	$stmt->bind_param("iss", $classid, $docname, $url);
+	$result = $stmt->execute();
+	$stmt->close();
+	return $result;
+}
 
 function fetchDocumentByCourseId($courseid)
 {
