@@ -8,6 +8,7 @@ require_once("models/config.php");
 if (!securePage($_SERVER['PHP_SELF'])){die();}
 
 destroySession("classid");
+destroySession("assignid");
 //Log the user out
 if(isUserLoggedIn())
 {

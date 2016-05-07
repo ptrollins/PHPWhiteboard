@@ -23,17 +23,26 @@ if(isUserLoggedIn()) {
 	<ul>
 	<li><a href='account.php'>Classes</a></li>";
 		
-	if (isset($_SESSION['classid']) && !empty($_SESSION['classid'])) {
-		echo "
-		<ul>
-		<li><a href='student_documents.php'>Documents</a></li>
-		<li><a href='assignments.php?c=".$_SESSION['classid']."'>Assignments</a></li>
-		<li><a href='discussion.php'>Discussion</a></li>
-		</ul>";
+		if (isset($_SESSION['classid']) && !empty($_SESSION['classid'])) {
+			echo "
+			<ul>
+			<li><a href='documents.php'>Documents</a></li>
+			<li><a href='assignments.php?c=" .$_SESSION['classid']."'>Assignments</a></li>
+			<li><a href='discussion.php'>Discussion</a></li>
+			</ul><br>";
+			//Links for permission level 3 (instructor)
+			if ($loggedInUser->checkPermission(array(3)) && isset($_SESSION['classid'])){
+				echo"
+			<ul>
+				<li><a href='assignment_create.php'>Create Assignment</a></li>
+				<li><a href='document_upload.php'>Upload Document</a></li>
+			</ul>
+			";
+			}
+		}
 	}
 	echo"
-	</ul>";
-	}
+	<ul>";
 
 	//Links for permission level 2 (default admin)
 	if ($loggedInUser->checkPermission(array(2))){
@@ -47,14 +56,6 @@ if(isUserLoggedIn()) {
 	</ul>";
 	}
 
-	//Links for permission level 3 (instructor)
-	if ($loggedInUser->checkPermission(array(3)) && isset($_SESSION['classid'])){
-		echo"
-		<ul>
-			<li><a href='assignment_create.php'>Create Assignment</a></li>
-		</ul>
-		";
-	}
 }
 //Links for users not logged in
 else {

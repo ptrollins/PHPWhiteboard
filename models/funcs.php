@@ -1,4 +1,3 @@
-
 <?php
 /*
 UserCake Version: 2.0.2
@@ -1315,7 +1314,6 @@ function createBlog($title, $content)
 {
 	global $loggedInUser, $mysqli, $db_table_prefix;
 	$classid = intval($_SESSION["classid"]);
-print(gettype($loggedInUser->user_id).gettype($classid).gettype($title).gettype($content));
 	$stmt = $mysqli->prepare(
 		"INSERT INTO ".$db_table_prefix."discussion(
 		user_id,
@@ -1609,6 +1607,12 @@ function fetchRoster($courseid) {
 //create a new assignment.
 function createAssignment($courseid, $assignname, $description, $duedate)
 {
+	$currentfolder = getcwd();
+	$destination_folder = $currentfolder . '/documents/';
+	define("UPLOAD_DIR", $destination_folder);
+	
+	
+	
 	global $mysqli, $db_table_prefix;
 	$stmt = $mysqli->prepare(
 		"INSERT INTO ".$db_table_prefix."assignments (
@@ -1630,7 +1634,7 @@ function createAssignment($courseid, $assignname, $description, $duedate)
 	return $result;
 }
 
-function submitAssignment($assignid, $userid, $uploaddate, $url)
+function submitAssignment($assignid, $userid, $url)
 {
 	global $mysqli, $db_table_prefix;
 	$stmt = $mysqli->prepare(
@@ -1643,11 +1647,11 @@ function submitAssignment($assignid, $userid, $uploaddate, $url)
 		VALUES (
 		?,
 		?,
-		?,
+		'" . date('Y-m-d H:i:s') . "',
 		?
 		)"
 	);
-	$stmt->bind_param("iiss", $assignid, $userid, $uploaddate, $url);
+	$stmt->bind_param("iis", $assignid, $userid, $url);
 	$result = $stmt->execute();
 	$stmt->close();
 	return $result;
@@ -1706,38 +1710,39 @@ function truncate_chars($text, $limit, $ellipsis = '...') {
 
 //---------------------------------------------
 
-function fetchStudentCouseId($studentid)
-{
-	global $mysqli,$db_table_prefix;
-	$stmt = $mysqli->prepare("SELECT
-		course_id
-		FROM ".$db_table_prefix."users
-		WHERE
-		student_id = ?");
-	$stmt->bind_param("i", $studentid);
-	$stmt->execute();
-	$stmt->bind_result($couseid);
-
-	while ($stmt->fetch()){
-		$row = array("course_id" => $courseid);
-	}
-	$stmt->close();
-	return ($row);
-}
+//function fetchStudentByCouseId($studentid)
+//{
+//	global $mysqli,$db_table_prefix;
+//	$stmt = $mysqli->prepare("SELECT
+//		course_id
+//		FROM ".$db_table_prefix."users
+//		WHERE
+//		student_id = ?");
+//	$stmt->bind_param("i", $studentid);
+//	$stmt->execute();
+//	$stmt->bind_result($courseid);
+//
+//	while ($stmt->fetch()){
+//		$row = array("course_id" => $courseid);
+//	}
+//	$stmt->close();
+//	return ($row);
+//}
 
 
 function fetchDocumentByCourseId($courseid)
 {
 	global $mysqli, $db_table_prefix;
-	$stmt = $mysqli->prepare("SELECT name, url
+	$stmt = $mysqli->prepare("
+	  SELECT docname, url
       FROM ".$db_table_prefix."documents
-      WHERE course_id = ? LIMIT 1");
+      WHERE course_id = ?");
 	$stmt->bind_param("i", $courseid);
 	$result = $stmt->execute();
-	$stmt->bind_result($course_name, $course_url);
+	$stmt->bind_result($docname, $course_url);
 	while ($stmt->fetch()) {
 		$row[] = array(
-			'name'    => $course_name,
+			'name'    => $docname,
 			'url'     => $course_url
 		);
 	}
